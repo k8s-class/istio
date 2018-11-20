@@ -22,4 +22,8 @@ helm install install/kubernetes/helm/istio --name istio --namespace istio-system
 kubectl create -f <(istioctl kube-inject -f helloworld-tls.yaml) # Needs Sidecar for mTLS
 kubectl create -f create -f helloworld-tls-legacy.yaml # Legacy does not use mTLS
 kubectl create -f disable-tls-legacy.yaml
+kubectl get services --all-namespaces | grep istio-ingressgateway ( get external IP Address )
+
+curl http://168.61.165.163 /hello -H "Host: hello-tls.example.com"
+
 ```
