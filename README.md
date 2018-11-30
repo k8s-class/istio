@@ -29,5 +29,5 @@ kubectl create -f disable-tls-legacy.yaml
 kubectl get services --all-namespaces | grep istio-ingressgateway ( get external IP Address )
 
 curl http://168.61.165.163 /hello -H "Host: hello-tls.example.com"
-
+curl http://a69300426e81b11e8864a0ee2c9ec821-874261291.us-east-1.elb.amazonaws.com -H "Host: hello-tls.example.com"
 ```
