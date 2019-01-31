@@ -62,6 +62,7 @@ To Edit or Customize:
 
 helm repo add istio.io https://storage.googleapis.com/istio-release/releases/1.1.0-snapshot.5/charts
 helm dep update install/kubernetes/helm/istio/
+helm template install/kubernetes/helm/istio --name istio --namespace istio-system --set gateways.istio-ingressgateway.serviceAnnotations.'service\.beta\.kubernetes\.io/azure-load-balancer-internal'="true" > aks-istio.yaml
 helm install install/kubernetes/helm/istio-init --name istio-init --namespace istio-system
 helm upgrade --install istio --namespace istio-system install/kubernetes/helm/istio/
 helm install install/kubernetes/helm/istio --name istio --namespace istio-system --set tracing.enabled=true,servicegraph.enabled=true,grafana.enabled=true --set global.mtls.enabled=true
