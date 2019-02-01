@@ -172,7 +172,7 @@ metadata:
   name: helloworld-gateway
 spec:
   selector:
-    istio: ingressgateway # use istio default controller
+    istio: ingressgateway 
   servers:
   - port:
       number: 80
@@ -224,7 +224,7 @@ spec:
   - route: 
     - destination:
         host: hello.ns1.svc.cluster.local
-        subset: v1-tls # match v3 only
+        subset: v1-tls 
         port:
           number: 8080
 ---
