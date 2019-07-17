@@ -78,23 +78,4 @@ kubectl get services --all-namespaces | grep istio-ingressgateway ( get external
 curl http://168.61.165.163 /hello -H "Host: hello-tls.example.com"
 curl http://a69300426e81b11e8864a0ee2c9ec821-874261291.us-east-1.elb.amazonaws.com -H "Host: hello-tls.example.com"
 ```
-# How to test mutual tls is working
-```
-kubectl get secret istio.default -o jsonpath='{.data.root-cert\.pem}' | base64 --decode > root-cert.pem
-kubectl get secret istio.default -o jsonpath='{.data.cert-chain\.pem}' | base64 --decode > cert-chain.pem
-kubectl get secret istio.default -o jsonpath='{.data.key\.pem}' | base64 --decode > key.pem
 
-kubectl get pods
-
-kubectl cp root-cert.pem mtlstest-697c7b4b7c-g5hgl:/tmp -c mtlstest
-kubectl cp cert-chain.pem mtlstest-697c7b4b7c-g5hgl:/tmp -c mtlstest
-kubectl cp key.pem mtlstest-697c7b4b7c-g5hgl:/tmp -c mtlstest
-
-kubectl exec -ti mtlstest-697c7b4b7c-g5hgl /bin/bash
-
-mkdir /etc/certs
-mv /tmp/*.pem /etc/certs/
-
-curl -k -v http://hello.ns1.svc.cluster.local:8080/hello
-
-```
